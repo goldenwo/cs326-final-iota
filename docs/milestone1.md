@@ -7,11 +7,11 @@ Investor's Zone
 ## Investing Competition Website
 
 # Team Overview
-|                                                | Name              | Github Alias                                |
-|------------------------------------------------|-------------------|---------------------------------------------|
-| ![](https://github.com/zsimonelli.png?size=40) | Zachary Simonelli | [zsimonelli](https://github.com/zsimonelli) |
-| ![](https://github.com/goldenwo.png?size=40)   | Golden Wo         | [goldenwo](https://github.com/goldenwo)     |
-| ![](https://github.com/wparsons1.png?size=40)  | William Parsons   | [wparsons1](https://github.com/wparsons1)   |
+| Name              | Github Alias                                |
+|-------------------|---------------------------------------------|
+| Zachary Simonelli | [zsimonelli](https://github.com/zsimonelli) |
+| Golden Wo         | [goldenwo](https://github.com/goldenwo)     |
+| William Parsons   | [wparsons1](https://github.com/wparsons1)   |
 
 Zack Simonelli - zsimonelli  
 Golden Wo - goldenwo  

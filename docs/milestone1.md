@@ -2,7 +2,7 @@
 Team Iota
 
 # Application name
-Investor's Zone
+Stonks
 
 # Team Overview
 | Name              | Github Alias                                |

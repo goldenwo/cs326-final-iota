@@ -17,4 +17,17 @@ Our project idea is a website that hosts an investing competition. It is centere
 # Important Data
 Components to our project include a page that ranks top public investors by gain % with a graph that shows their progress. It would also include a page for all of the groups that would be possible within the website and a place for users to join / interact with these groups. A user account system would also be needed for users to login and record their investments and track how they are performing compared to their peers. 
 
-# Wireframe
+# User Interface
+
+## Log In
+
+
+
+## Homepage
+
+
+
+## Rankings
+
+
+

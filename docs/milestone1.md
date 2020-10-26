@@ -21,13 +21,16 @@ Components to our project include a page that ranks top public investors by gain
 
 ## Log In
 
-
+![Log in](imgs/Log_In.png)
 
 ## Homepage
 
-
+![Homepage](imgs/Homepage.png)
 
 ## Rankings
 
+![Rankings](imgs/Rankings.png)
 
+## Groups
 
+![Groups](imgs/Groups.png)

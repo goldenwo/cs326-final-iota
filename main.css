@@ -14,3 +14,22 @@
 #bell, #message, #avatar {
     filter: brightness(1.3) !important;
 }
+.mid {
+    text-align: center;
+}
+.left {
+    text-align: left;
+}
+.right {
+    text-align: right;
+}
+.postbox {
+    width: calc(100% - 40px);
+}
+.btn-secondary {
+    color: black !important;
+    background-color: white !important;
+}
+.portfolioNumbers {
+    color: green;
+}

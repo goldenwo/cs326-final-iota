@@ -8,7 +8,7 @@
         <title>Stonks</title>
     </head>
     <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-faded">
+        <nav class="navbar navbar-expand-md navbar-light bg-faded border-bottom">
             <a class="navbar-brand" href="#">
               <img id="brandlogo" src="docs/imgs/stonks_logo.svg" class="d-inline-block align-top" width="100" height="30" alt="" loading="lazy">
             </a>
@@ -40,6 +40,66 @@
             </a>
         </nav>
 
-        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-2 mid pt-3 border-right">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          My Portfolio #1
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                    <div class="portfolioNumbers">
+                        <h4>$997.82</h4>
+                        +$1.82 <br>
+                        +1.00%
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row border-top pt-3">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col left"><h5>SPY</h5></div>
+                                    <div class="col right"><h5>338.42</h5></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col left"><h5>SPDR S&P...</h5></div>
+                                    <div class="col right"><h5>-6.39</h5></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row border-top border-bottom pt-3">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col left"><h5>VIX</h5></div>
+                                    <div class="col right"><h5>33.68</h5></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col left"><h5>CBOE MA...</h5></div>
+                                    <div class="col right"><h5>+4.88</h5></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2 mid pt-3"></div>
+                <div class="col-4 mid pt-3">
+                    <form class="form-inline"></form>
+                        <a class="d-inline-block align-top" href="#">
+                            <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt="">
+                        </a>
+                        <textarea class="form-control d-inline-block postbox" id="userpost" rows="2" placeholder="Post here!"></textarea>
+                    </form>
+                    <button type="submit" class="btn btn-primary border-0 float-right">Post</button>
+                </div>
+                <div class="col-2 mid pt-3"></div>
+                <div class="col-2 mid pt-3 border-left">
+                    4
+                </div>
+            </div>
+        </div>
     </body>
 </html>

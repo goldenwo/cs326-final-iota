@@ -8,3 +8,6 @@
 .btn-outline-secondary:hover {
     background: #f7c325 !important;
 }
+#login {
+    text-align: center;
+}

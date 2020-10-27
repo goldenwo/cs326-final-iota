@@ -53,4 +53,4 @@ The Side Bar and the Notification panel with search bar that has been consistent
 
 Golden Wo: Helped design wireframes, designed login html page, designed homepage
 Zachary Simonelli: Helped design wireframes, designed rankings html page, worked on main.css
-William Parsons: Designed Groups html page, provided explanations for wireframe / pages, helped edit wireframes. 
+William Parsons: Designed Groups html page, worked on homepage html page and main.css provided explanations for wireframe / pages, helped edit wireframes. 

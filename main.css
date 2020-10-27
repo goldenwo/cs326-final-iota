@@ -11,3 +11,6 @@
 #login {
     text-align: center;
 }
+#bell, #message, #avatar {
+    filter: brightness(1.3) !important;
+}

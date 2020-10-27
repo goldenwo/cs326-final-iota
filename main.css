@@ -8,9 +8,22 @@
 .btn-outline-secondary:hover {
     background: #f7c325 !important;
 }
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
 #login {
     text-align: center;
 }
 #bell, #message, #avatar {
     filter: brightness(1.3) !important;
+}
+#group {
+    text-align: center;
+}
+.card {
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px; /* Added */
 }

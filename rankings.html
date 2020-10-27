@@ -46,6 +46,8 @@
 
         <div class = 'container-fluid'>
             <div class = 'row'>
+
+              <!-- LEFT SIDEBAR -->
             <div class = 'col-2'>
 
                 <div class="dropdown">
@@ -91,6 +93,8 @@
               </div>
 
             </div>
+
+            <!-- MIDDLE RANKINGS COLUMN -->
             <div class = 'col-8'>
 
            <h3>Rankings</h3>      
@@ -107,7 +111,7 @@
                     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Friends
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="comparison-dropdown">
                       <a class="dropdown-item"href="#">Friends</a>
                       <a class="dropdown-item" href="#">Groups</a>
                       <a class="dropdown-item" href="#">Global</a>
@@ -168,8 +172,56 @@
                 
                     
             </div>
-            <div class = 'col-2'>
-                <h3>Trending Portfolios</h3>
+
+            <!-- RIGHT SIDEBAR -->
+              <div class="col-2 mid pt-3 border-left">
+                <img id="trend" src="docs/imgs/trend.svg" class="d-inline-block" width="30" height="30" alt="">
+                <h5 class="d-inline-block">Trending Portfolios</h5>
+                <div class="container-fluid pt-3">
+                    <div class="row border-bottom pt-1">
+                        <div class="col left">
+                            <h4>Retire by 35!</h4>
+                            By Jimmy Gains
+                            <h5 class="portfolioNumbers">+35.46%</h5>
+                        </div>
+                    </div>
+                    <div class="row border-bottom pt-1">
+                        <div class="col left">
+                            <h4>Financial Freedom</h4>
+                            By ICanPredictTheMarket
+                            <h5 class="portfolioNumbers">+24.89%</h5>
+                        </div>
+                    </div>
+                    <div class="row border-bottom pt-1">
+                        <div class="col left">
+                            <h4>Warren Buffet's...</h4>
+                            By Investor999
+                            <h5 class="portfolioNumbers">+6.22%</h5>
+                        </div>
+                    </div>
+                    <div class="row border-bottom pt-1">
+                        <div class="col left">
+                            <h4>Retail Investors</h4>
+                            By YourAverageJoe
+                            <h5 class="portfolioNumbers">+0.18%</h5>
+                        </div>
+                    </div>
+                    <div class="row border-bottom pt-1">
+                        <div class="col left">
+                            <h4>World's Best</h4>
+                            By WallStreetAnalyst3
+                            <h5 class="badPortfolioNumbers">-0.29%</h5>
+                        </div>
+                    </div>
+                    <div class="row border-bottom pt-1">
+                        <div class="col left">
+                            <h4>Permanent Port...</h4>
+                            By SmartyPants
+                            <h5 class="portfolioNumbers">-0.06%</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
         

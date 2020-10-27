@@ -68,7 +68,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col left"><h5>SPDR S&P...</h5></div>
-                                    <div class="col right"><h5>-6.39</h5></div>
+                                    <div class="col right"><h5 class="badPortfolioNumbers">-6.39</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,19 @@
                                 </div>
                                 <div class="row">
                                     <div class="col left"><h5>CBOE MA...</h5></div>
-                                    <div class="col right"><h5>+4.88</h5></div>
+                                    <div class="col right"><h5 class="portfolioNumbers">+4.88</h5></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row border-top border-bottom pt-3">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col left"><h5>AAPL</h5></div>
+                                    <div class="col right"><h5>115.14</h5></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col left"><h5>APPLE IN...</h5></div>
+                                    <div class="col right"><h5 class="portfolioNumbers">+0.01</h5></div>
                                 </div>
                             </div>
                         </div>
@@ -89,69 +101,103 @@
                 <div class="col-2 mid pt-3"></div>
                 <!--MIDDLE FEED-->
                 <div class="col-4 mid pt-3">
-                    <form class="form-inline"></form>
-                        <a class="d-inline-block align-top" href="#">
-                            <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt="">
-                        </a>
-                        <textarea class="form-control d-inline-block postbox" id="userpost" rows="2" placeholder="Post here!"></textarea>
-                    </form>
-                    <button type="submit" class="btn btn-primary border-0 float-right">Post</button>
+                    <div class="container-fluid">
+                        <div class="row border-bottom pb-2 pt-3">
+                            <div class="col">
+                                <form class="form-inline"></form>
+                                    <a class="d-inline-block align-top" href="#">
+                                        <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt="">
+                                    </a>
+                                    <textarea class="form-control d-inline-block postbox" id="userpost" rows="2" placeholder="Post here!"></textarea>
+                                </form>
+                                <button type="submit" class="btn btn-primary border-0 float-right">Post</button>
+                            </div>
+                        </div>
+                        <div class="row border-bottom pb-2 pt-3">
+                            <div class="col left">
+                              <div class="card">
+                                <div class="card-body">
+                                  <a class="d-inline-block align-top" href="#">
+                                    <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt="">
+                                  </a>
+                                  <h5 class="card-title d-inline-block">Jane Doe</h5>
+                                  <p class="card-text">So much gains!</p>
+                                  <div class="card">
+                                    <h5 class="card-title">The Best Portfolio</h5>
+                                    <h5 class="portfolioNumbers">+14.03%</h5>
+                                      <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">SPY</li>
+                                        <li class="list-group-item">VTI</li>
+                                        <li class="list-group-item">ZM</li>
+                                        <li class="list-group-item">AAPL</li>
+                                        <li class="list-group-item">TSLA</li>
+                                      </ul>
+                                  </div>
+                                  <a class="d-inline-block align-top" href="#">
+                                    <img id="thumbsup" src="docs/imgs/thumbsup.svg" class="d-inline-block" width="20" height="20" alt="">
+                                  </a>
+                                  <p class="d-inline-block card-text">3,049</p>
+                                  <a class="d-inline-block align-top" href="#">
+                                    <img id="comment" src="docs/imgs/comment.svg" class="d-inline-block" width="20" height="20" alt="">
+                                  </a>
+                                  <a class="d-inline-block align-top" href="#">
+                                    <img id="share" src="docs/imgs/share.svg" class="d-inline-block" width="20" height="20" alt="">
+                                  </a>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-2 mid pt-3"></div>
-                <div class="card-columns">
-                <div class="card border-light mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                            <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt=""> Jane Doe
-                          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.SO MUCH GAINS!</p>
-                          <div class="card-header">
-                            The Best Portfolio
-                          </div>
-                          <ul class="list-group list-group-flush">
-                            <li class="list-group-item">SPY</li>
-                            <li class="list-group-item">VTI</li>
-                            <li class="list-group-item">ZM</li>
-                            <li class="list-group-item">TSLA</li>
-                          </ul>
-                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card border-light mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                            <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt=""> Jane Doe
-                          <p class="card-text">SO MUCH GAINS!</p>
-                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card border-light mb-3" style="max-width: 540px;">
-                    <div class="row no-gutters">
-                      <div class="col-md-4">
-                      </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                            <img id="avatar" src="docs/imgs/avatar.svg" class="d-inline-block align-top" width="30" height="30" alt=""> Jane Doe
-                          <p class="card-text">SO MUCH GAINS!</p>
-                          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-                </div>
                 <!--RIGHT SIDEBAR-->
                 <div class="col-2 mid pt-3 border-left">
-                    
+                    <img id="trend" src="docs/imgs/trend.svg" class="d-inline-block" width="30" height="30" alt="">
+                    <h5 class="d-inline-block">Trending Portfolios</h5>
+                    <div class="container-fluid pt-3">
+                        <div class="row border-bottom pt-1">
+                            <div class="col left">
+                                <h4>Retire by 35!</h4>
+                                By Jimmy Gains
+                                <h5 class="portfolioNumbers">+35.46%</h5>
+                            </div>
+                        </div>
+                        <div class="row border-bottom pt-1">
+                            <div class="col left">
+                                <h4>Financial Freedom</h4>
+                                By ICanPredictTheMarket
+                                <h5 class="portfolioNumbers">+24.89%</h5>
+                            </div>
+                        </div>
+                        <div class="row border-bottom pt-1">
+                            <div class="col left">
+                                <h4>Warren Buffet's...</h4>
+                                By Investor999
+                                <h5 class="portfolioNumbers">+6.22%</h5>
+                            </div>
+                        </div>
+                        <div class="row border-bottom pt-1">
+                            <div class="col left">
+                                <h4>Retail Investors</h4>
+                                By YourAverageJoe
+                                <h5 class="portfolioNumbers">+0.18%</h5>
+                            </div>
+                        </div>
+                        <div class="row border-bottom pt-1">
+                            <div class="col left">
+                                <h4>World's Best</h4>
+                                By WallStreetAnalyst3
+                                <h5 class="badPortfolioNumbers">-0.29%</h5>
+                            </div>
+                        </div>
+                        <div class="row border-bottom pt-1">
+                            <div class="col left">
+                                <h4>Permanent Port...</h4>
+                                By SmartyPants
+                                <h5 class="portfolioNumbers">-0.06%</h5>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

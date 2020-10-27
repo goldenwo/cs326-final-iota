@@ -8,12 +8,18 @@
 .btn-outline-secondary:hover {
     background: #f7c325 !important;
 }
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
 #login {
     text-align: center;
 }
 #bell, #message, #avatar {
     filter: brightness(1.3) !important;
 }
+<<<<<<< HEAD
 .mid {
     text-align: center;
 }
@@ -32,4 +38,13 @@
 }
 .portfolioNumbers {
     color: green;
+=======
+#group {
+    text-align: center;
+}
+.card {
+        margin: 0 auto;
+        float: none;
+        margin-bottom: 10px;
+>>>>>>> 8fd23ec8c458daad70bac97a0618ffa45f52e85b
 }

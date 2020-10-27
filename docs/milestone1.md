@@ -48,3 +48,9 @@ The groups page displays all of the groups the user is apart of. The user will t
 ## Side Bar
 
 The Side Bar and the Notification panel with search bar that has been consistent throughout the website is going to be on every page besides the log in page. The left side bar shows the users their portfolio with results and prominent stocks in their portfolio sorted by percentage gained or lost. The right bar displays public trending portfolios that have had success in the recent past with the ability to view them and see what stocks they have invested in. The top notification and search bar are a place for the user to recieve notifications about group invites or direct messages from a curious investor. There is also a search bar where you can search throughout the website for a certain stock, user portfolio, or specific group.
+
+## Division of Labor
+
+Golden Wo: Helped design wireframes, designed login html page, designed homepage
+Zachary Simonelli:
+William Parsons: Designed Groups html page, provided explanations for wireframe / pages, helped edit wireframes. 

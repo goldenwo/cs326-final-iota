@@ -1,0 +1,10 @@
+.btn-primary {
+    color: black !important;
+    background-color: rgba(247, 195, 37) !important;
+}
+.btn-primary:hover {
+    filter: brightness(0.9) !important;
+}
+.btn-outline-secondary:hover {
+    background: #f7c325 !important;
+}

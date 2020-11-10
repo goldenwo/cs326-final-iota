@@ -21,4 +21,4 @@ https://cs326-final-iota.herokuapp.com/
 ## Division of Labor
 William Parsons:
 Zachary Simonelli:
-Golden Wo: 
+Golden Wo: Created api endpoints to handle different requests, helped create heroku databases, added function to login and register page.

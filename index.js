@@ -34,8 +34,8 @@ async function connectAndRun(task) {
     }
 }
 
-async function addUser(name, password) {
-    return await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2);", [name, password]));
+async function addUser(name, password, assigned_group) {
+    return await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3);", [name, password, assigned_group]));
 }
 
 async function findUser(name, password) {
@@ -69,7 +69,7 @@ async function addPortfolio(name, author, percentage) {
 app.post('/register', (req, res) => {
     const { username, password, confirmPassword } = req.body;
     if (password === confirmPassword) {
-        addUser(username, password);
+        addUser(username, password, NULL);
         res.render('login', {
             message: 'Registration Complete. Please login to continue.',
             messageClass: 'alert-success'

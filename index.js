@@ -57,8 +57,30 @@ async function addPortfolio(name, author, percentage) {
 }
 
 app.get("/getRankings", async (req, res) => {
-    const books = await getBooks();
-    res.send(JSON.stringify(books));
+    const rankings = await getRankings();
+    res.send(JSON.stringify(rankings));
+});
+
+app.get("/addRanking", async (req, res) => {
+    await addRanking(req.query.name, req.query.percentage);
+});
+
+app.get("/getGroups", async (req, res) => {
+    const groups = await getGroups();
+    res.send(JSON.stringify(groups));
+});
+
+app.get("/addGroup", async (req, res) => {
+    await addGroup(req.query.name);
+});
+
+app.get("/getPortfolios", async (req, res) => {
+    const portfolios = await getPortfolios();
+    res.send(JSON.stringify(portfolios));
+});
+
+app.get("/addPortfolio", async (req, res) => {
+    await addPortfolio(req.query.name, req.query.author, req.query.percentage);
 });
 
 app.listen(port);

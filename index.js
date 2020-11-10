@@ -38,6 +38,14 @@ async function connectAndRun(task) {
     }
 }
 
+async function addUser(name, password) {
+    return await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2);", [name, password]));
+}
+
+async function findUser(name, password) {
+    return await connectAndRun(db => db.any("SELECT * FROM users;"));
+}
+
 async function getRankings() {
     return await connectAndRun(db => db.any("SELECT * FROM rankings;"));
 }
@@ -61,6 +69,39 @@ async function getPortfolios() {
 async function addPortfolio(name, author, percentage) {
     return await connectAndRun(db => db.any("INSERT INTO portfolios VALUES ($1, $2, $3);", [name, author, percentage]))
 }
+
+app.post('/register', (req, res) => {
+    const { username, password, confirmPassword } = req.body;
+    if (password === confirmPassword) {
+        await addUser(username, password);
+        res.render('login', {
+            message: 'Registration Complete. Please login to continue.',
+            messageClass: 'alert-success'
+        });
+    }
+    else {
+        res.render('register', {
+            message: 'Password does not match.',
+            messageClass: 'alert-danger'
+        });
+    }
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const user = await findUser(username, password);
+
+    if (user != NULL) {
+        
+        res.redirect('/home');
+    }
+    else {
+        res.render('login', {
+            message: 'Invalid username or password',
+            messageClass: 'alert-danger'
+        });
+    }
+});
 
 app.get("/getRankings", async (req, res) => {
     const rankings = await getRankings();

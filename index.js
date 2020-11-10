@@ -43,7 +43,7 @@ async function addUser(name, password) {
 }
 
 async function findUser(name, password) {
-    return await connectAndRun(db => db.any("SELECT * FROM users;"));
+    return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1 AND password = $2;", [name, password]));
 }
 
 async function getRankings() {
@@ -92,8 +92,7 @@ app.post('/login', (req, res) => {
     const user = await findUser(username, password);
 
     if (user != NULL) {
-        
-        res.redirect('/home');
+        res.redirect('/index.html');
     }
     else {
         res.render('login', {

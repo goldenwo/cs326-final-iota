@@ -1,13 +1,9 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
-const exphbs = require('express-handlebars');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 //static pages
-app.use(express.static(''));
-//fake info to send back
-const faker = require("faker");
+app.use(express.static('./'));
 
 const pgp = require("pg-promise")({
     connect(client) {
@@ -73,7 +69,7 @@ async function addPortfolio(name, author, percentage) {
 app.post('/register', (req, res) => {
     const { username, password, confirmPassword } = req.body;
     if (password === confirmPassword) {
-        await addUser(username, password);
+        addUser(username, password);
         res.render('login', {
             message: 'Registration Complete. Please login to continue.',
             messageClass: 'alert-success'
@@ -89,7 +85,7 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    const user = await findUser(username, password);
+    const user = findUser(username, password);
 
     if (user != NULL) {
         res.redirect('/index.html');

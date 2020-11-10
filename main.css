@@ -52,3 +52,10 @@
 #group {
     text-align: center;
 }
+.card-title:hover {
+    color: #f7c325 !important;
+}
+.links {
+    color: black !important;
+    text-decoration: none !important;
+}

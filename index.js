@@ -1,13 +1,9 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
-const exphbs = require('express-handlebars');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 //static pages
-app.use(express.static(''));
-//fake info to send back
-const faker = require("faker");
+app.use(express.static('./'));
 
 const pgp = require("pg-promise")({
     connect(client) {
@@ -18,7 +14,7 @@ const pgp = require("pg-promise")({
         console.log('Disconnected from database:', client.connectionParameters.database);
     }
 });
-const url = process.env.DATABASE_URL;
+const url = process.env.DATABASE_URL || "postgres://powcrkcrnpbbzb:c2ec7aa8488758fbde1745685d1e0f0cee3a8b698cb7dee8cae68dc50046bc91@ec2-23-23-36-227.compute-1.amazonaws.com:5432/d3e8rpc484cq6";
 const db = pgp(url);
 
 async function connectAndRun(task) {
@@ -38,12 +34,12 @@ async function connectAndRun(task) {
     }
 }
 
-async function addUser(name, password) {
-    return await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2);", [name, password]));
+async function addUser(name, password, assigned_group) {
+    return await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3);", [name, password, assigned_group]));
 }
 
 async function findUser(name, password) {
-    return await connectAndRun(db => db.any("SELECT * FROM users;"));
+    return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1 AND password = $2;", [name, password]));
 }
 
 async function getRankings() {
@@ -73,7 +69,7 @@ async function addPortfolio(name, author, percentage) {
 app.post('/register', (req, res) => {
     const { username, password, confirmPassword } = req.body;
     if (password === confirmPassword) {
-        await addUser(username, password);
+        addUser(username, password, NULL);
         res.render('login', {
             message: 'Registration Complete. Please login to continue.',
             messageClass: 'alert-success'
@@ -89,11 +85,10 @@ app.post('/register', (req, res) => {
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    const user = await findUser(username, password);
+    const user = findUser(username, password);
 
     if (user != NULL) {
-        
-        res.redirect('/home');
+        res.redirect('/index.html');
     }
     else {
         res.render('login', {

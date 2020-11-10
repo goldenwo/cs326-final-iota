@@ -46,6 +46,9 @@
 .portfolioNumbers {
     color: green;
 }
+.badPortfolioNumbers{
+    color: red;
+}
 #group {
     text-align: center;
 }

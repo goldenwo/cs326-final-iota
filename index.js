@@ -1,8 +1,14 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8080;
+const exphbs = require('express-handlebars');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+//static pages
+app.use(express.static(''));
+//fake info to send back
+const faker = require("faker");
 
-const express = require("express");
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -63,6 +69,7 @@ app.get("/getRankings", async (req, res) => {
 
 app.get("/addRanking", async (req, res) => {
     await addRanking(req.query.name, req.query.percentage);
+    res.send(req.query.name + ' ' + req.query.percentage);
 });
 
 app.get("/getGroups", async (req, res) => {
@@ -72,6 +79,7 @@ app.get("/getGroups", async (req, res) => {
 
 app.get("/addGroup", async (req, res) => {
     await addGroup(req.query.name);
+    res.send(req.query.name);
 });
 
 app.get("/getPortfolios", async (req, res) => {
@@ -81,6 +89,7 @@ app.get("/getPortfolios", async (req, res) => {
 
 app.get("/addPortfolio", async (req, res) => {
     await addPortfolio(req.query.name, req.query.author, req.query.percentage);
+    res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.percentage);
 });
 
 app.listen(port);

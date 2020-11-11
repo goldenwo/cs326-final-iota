@@ -19,6 +19,6 @@ The portfolio API is based on the concept of always being able to see the user p
 https://cs326-final-iota.herokuapp.com/
 
 ## Division of Labor
-William Parsons:
+William Parsons: Wrote milestone2 md, helped create login, register.
 Zachary Simonelli:
 Golden Wo: Created api endpoints to handle different requests, helped create heroku databases, added function to login and register page.

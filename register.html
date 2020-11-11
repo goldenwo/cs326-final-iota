@@ -33,24 +33,24 @@
         <div class="row justify-content-md-center pt-5">
             <div class="col-md-4">
         
-                <form method="POST" action="/register">
+                <form>
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input name="username" type="text" class="form-control" id="usernameInput" placeholder="Enter username">
+                        <input name="username" type="text" class="form-control" id="username" placeholder="Enter username">
                     </div>
         
                     <div class="form-group">
-                        <label for="passwordInput">Password</label>
-                        <input name="password" type="password" class="form-control" id="passwordInput" placeholder="Password">
+                        <label for="password">Password</label>
+                        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
                     </div>
         
                     <div class="form-group">
-                        <label for="confirmPasswordInput">Confirm Password</label>
-                        <input name="confirmPassword" type="password" class="form-control" id="confirmPasswordInput"
+                        <label>Confirm Password</label>
+                        <input name="confirmPassword" type="password" class="form-control" id="confirmPassword"
                             placeholder="Re-enter your password here">
                     </div>
         
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary" id="registerbutton">Register</button>
                 </form>
             </div>
         </div>

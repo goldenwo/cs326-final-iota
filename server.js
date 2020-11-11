@@ -88,7 +88,7 @@ app.post('/login', (req, res) => {
     const user = findUser(username, password);
 
     if (user != NULL) {
-        res.redirect('/index.html');
+        res.redirect('/home.html');
     }
     else {
         res.render('login', {

@@ -20,5 +20,5 @@ https://cs326-final-iota.herokuapp.com/
 
 ## Division of Labor
 William Parsons: Wrote milestone2 md, helped create login, register.
-Zachary Simonelli:
+Zachary Simonelli: Worked on front end js and connectivity for the different pages, helped with heroku setup.
 Golden Wo: Created api endpoints to handle different requests, helped create heroku databases, added function to login and register page.

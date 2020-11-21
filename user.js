@@ -2,7 +2,7 @@
 
 window.addEventListener("load", async function () {
 
-    
+    //got the ticker symbols file from: https://github.com/yashwanth2804/TickerSymbol
     const response = await fetch("tickerSymbols.json");
         if (!response.ok) {
             console.log(response.error);
@@ -12,6 +12,7 @@ window.addEventListener("load", async function () {
         // We make dictionary a global.
         window.tickerSymbols = await response.json();
 
+        //got the code for an autocomplete searchbar from: https://www.w3schools.com/howto/howto_js_autocomplete.asp
           autocomplete(document.getElementById('myInput'), tickerSymbols);
 
  

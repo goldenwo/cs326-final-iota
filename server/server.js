@@ -251,17 +251,16 @@ app.get("/addGroup", async (req, res) => {
 
 app.get("/getPortfolios", async (req, res) => {
     const portfolios = await getPortfolios();
-    res.send(JSON.stringify(portfolios));
+    res.end(JSON.stringify(portfolios));
 });
 
 app.get("/addPortfolio", async (req, res) => {
     await addPortfolio(req.query.name, req.query.author, req.query.stock, req.query.shares);
-    res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.stock + ' ' + req.query.shares);
 });
 
 app.get("/stockInfo", async (req, res) => {
 	const result = await quote(req.query.symbol, ['price']);
-	res.send(result.price.regularMarketPrice + ' ' + result.price.regularMarketChangePercent);
+	res.end(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
 });
 
 app.listen(port);

@@ -177,7 +177,7 @@ function checkLoggedIn(req, res, next) {
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-	    res.send(res.params.userID);
+	    res.send(JSON.stringify({'username' : res.params.userID}));
 	});
 
 app.post('/login',

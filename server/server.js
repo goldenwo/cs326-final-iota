@@ -195,12 +195,12 @@ app.get('/',
 
 app.post('/login',
 	 passport.authenticate('local' , {
-	     'successRedirect' : '/private',
-	     'failureRedirect' : '/login' 
+	     'successRedirect' : '/index.html',
+	     'failureRedirect' : '/login.html' 
 	 }));
 
 app.get('/login',
-	(req, res) => res.sendFile('html/login.html',
+	(req, res) => res.sendFile('login.html',
 				   { 'root' : __dirname }));
 
 app.get('/logout', (req, res) => {
@@ -220,7 +220,7 @@ app.post('/register',
 	 });
 
 app.get('/register',
-	(req, res) => res.sendFile('html/register.html',
+	(req, res) => res.sendFile('register.html',
 				   { 'root' : __dirname }));
 
 app.get('/private',

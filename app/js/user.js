@@ -15,9 +15,11 @@ window.addEventListener("load", async function () {
         //got the code for an autocomplete searchbar from: https://www.w3schools.com/howto/howto_js_autocomplete.asp
           autocomplete(document.getElementById('myInput'), tickerSymbols);
 
-          document.getElementById('view-StockBtn').addEventListener('click', () => {
-            
-          });
+          // document.getElementById('view-StockBtn').addEventListener('click', async () => {
+          //   const stockRequest = await fetch('./stockInfo/' + document.getElementById('myInput').value);
+          //   const stockData = stockRequest.ok ? await stockRequest.json() : [];
+          //   console.log(stockData);
+          // });
  
     });
     

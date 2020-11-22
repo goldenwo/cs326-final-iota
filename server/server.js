@@ -11,6 +11,7 @@ const yahooFinance = require('yahoo-finance');
 const { quote } = require('yahoo-finance');
 //static pages
 
+
 const mc = new minicrypt();
 
 app.use(express.static('app'));

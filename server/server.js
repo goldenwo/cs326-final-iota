@@ -16,6 +16,8 @@ const mc = new minicrypt();
 app.use(express.static('app'));
 
 // Session configuration
+let password;
+let secrets;
 let thisSecret;
 if (!process.env.SECRET) {
 	secrets = require('../secrets.json');
@@ -103,8 +105,6 @@ async function connectAndRun(task) {
         }
     }
 }
-let password;
-let secrets;
 
 if (!process.env.PASSWORD) {
 	secrets = require('../secrets.json');

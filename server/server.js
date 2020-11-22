@@ -16,9 +16,15 @@ const mc = new minicrypt();
 app.use(express.static('app'));
 
 // Session configuration
-
+let thisSecret;
+if (!process.env.SECRET) {
+	secrets = require('secrets.json');
+	thisSecret = secrets.SECRET;
+	} else {
+		thisSecret = process.env.SECRET;
+	}
 const session = {
-    secret : process.env.SECRET || "SECRET", // set this encryption key in Heroku config (never in GitHub)!
+    secret : thisSecret, // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
     saveUninitialized: false
 };
@@ -72,7 +78,13 @@ const pgp = require("pg-promise")({
     }
 });
 
-const url = process.env.DATABASE_URL;
+let url = process.env.DATABASE_URL;
+if (!process.env.DATABASE_URL) {
+	secrets = require('secrets.json');
+	url = secrets.DATABASE_URL;
+	} else {
+		url = process.env.DATABASE_URL;
+	}
 const db = pgp(url);
 
 async function connectAndRun(task) {

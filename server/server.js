@@ -59,7 +59,7 @@ passport.deserializeUser((uid, done) => {
 app.use(express.json()); // allow JSON inputs
 app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 
-
+//Psql setup
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -69,6 +69,7 @@ const pgp = require("pg-promise")({
         console.log('Disconnected from database:', client.connectionParameters.database);
     }
 });
+
 const url = process.env.DATABASE_URL;
 const db = pgp(url);
 
@@ -88,6 +89,24 @@ async function connectAndRun(task) {
         }
     }
 }
+let password;
+let username;
+
+if (!process.env.PASSWORD) {
+	secrets = require('secrets.json');
+	password = secrets.password;
+	} else {
+		password = process.env.PASSWORD;
+	}
+if (!process.env.USERNAME) {
+	secrets = require('secrets.json');
+	password = secrets.USERNAME;
+	} else {
+		password = process.env.USERNAME;
+	}
+
+		
+	
 
 async function addUser(name, password, assigned_group) {
 	if (findUser(name)) {

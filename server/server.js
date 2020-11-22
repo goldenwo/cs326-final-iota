@@ -69,7 +69,7 @@ const pgp = require("pg-promise")({
         console.log('Disconnected from database:', client.connectionParameters.database);
     }
 });
-const url = process.env.DATABASE_URL || "postgres://powcrkcrnpbbzb:c2ec7aa8488758fbde1745685d1e0f0cee3a8b698cb7dee8cae68dc50046bc91@ec2-23-23-36-227.compute-1.amazonaws.com:5432/d3e8rpc484cq6";
+const url = process.env.DATABASE_URL;
 const db = pgp(url);
 
 async function connectAndRun(task) {
@@ -124,12 +124,12 @@ async function addGroup(groupName) {
     return await connectAndRun(db => db.any("INSERT INTO groups VALUES ($1);", [groupName]))
 }
 
-async function getPortfolios() {
-    return await connectAndRun(db => db.any("SELECT * FROM portfolios;"));
+async function findPortfolio(name, author) {
+    return await connectAndRun(db => db.any("SELECT * FROM portfolios WHERE name = $1 AND author = $2;", [name, author]));
 }
 
-async function addPortfolio(name, author, percentage) {
-    return await connectAndRun(db => db.any("INSERT INTO portfolios VALUES ($1, $2, $3);", [name, author, percentage]))
+async function addPortfolio(name, author, stock, shares) {
+    return await connectAndRun(db => db.any("INSERT INTO portfolios VALUES ($1, $2, $3, $4);", [name, author, stock, shares]))
 }
 
 async function findUser(username) {
@@ -234,8 +234,8 @@ app.get("/getPortfolios", async (req, res) => {
 });
 
 app.get("/addPortfolio", async (req, res) => {
-    await addPortfolio(req.query.name, req.query.author, req.query.percentage);
-    res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.percentage);
+    await addPortfolio(req.query.name, req.query.author, req.query.stock, req.query.shares);
+    res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.stock + ' ' + req.query.shares);
 });
 
 app.listen(port);

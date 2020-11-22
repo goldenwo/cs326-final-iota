@@ -13,7 +13,7 @@ const { quote } = require('yahoo-finance');
 
 const mc = new minicrypt();
 
-app.use(express.static('html'));
+app.use(express.static('app'));
 
 // Session configuration
 

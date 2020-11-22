@@ -1,4 +1,4 @@
-
+ 
 
 window.addEventListener("load", async function () {
 
@@ -15,6 +15,9 @@ window.addEventListener("load", async function () {
         //got the code for an autocomplete searchbar from: https://www.w3schools.com/howto/howto_js_autocomplete.asp
           autocomplete(document.getElementById('myInput'), tickerSymbols);
 
+          document.getElementById('view-StockBtn').addEventListener('click', () => {
+            
+          });
  
     });
     
@@ -38,12 +41,29 @@ window.addEventListener("load", async function () {
             /*for each item in the array...*/
             for (i = 0; i < arr.length; i++) {
               /*check if the item starts with the same letters as the text field value:*/
-              if (String(arr[i].name).substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+              if (String(arr[i].name).substr(0, val.length).toUpperCase() === val.toUpperCase()) {
                 /*create a DIV element for each matching element:*/
                 b = document.createElement("DIV");
                 /*make the matching letters bold:*/
                 b.innerHTML = "<strong>" + String(arr[i].name).substr(0, val.length) + "</strong>";
                 b.innerHTML += String(arr[i].name).substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+              }else if(String(arr[i].symbol).substr(0, val.length).toUpperCase() === val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + String(arr[i].symbol).substr(0, val.length) + "</strong>";
+                b.innerHTML += String(arr[i].symbol).substr(val.length);
                 /*insert a input field that will hold the current array item's value:*/
                 b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
                 /*execute a function when someone clicks on the item value (DIV element):*/
@@ -62,19 +82,19 @@ window.addEventListener("load", async function () {
         inp.addEventListener("keydown", function(e) {
             let x = document.getElementById(this.id + "autocomplete-list");
             if (x) x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) {
+            if (e.keyCode === 40) {
               /*If the arrow DOWN key is pressed,
               increase the currentFocus variable:*/
               currentFocus++;
               /*and and make the current item more visible:*/
               addActive(x);
-            } else if (e.keyCode == 38) { //up
+            } else if (e.keyCode === 38) { //up
               /*If the arrow UP key is pressed,
               decrease the currentFocus variable:*/
               currentFocus--;
               /*and and make the current item more visible:*/
               addActive(x);
-            } else if (e.keyCode == 13) {
+            } else if (e.keyCode === 13) {
               /*If the ENTER key is pressed, prevent the form from being submitted,*/
               e.preventDefault();
               if (currentFocus > -1) {

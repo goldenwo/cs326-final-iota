@@ -92,16 +92,16 @@ async function connectAndRun(task) {
     }
 }
 let password;
-let username;
+let secrets;
 
 if (!process.env.PASSWORD) {
-	let secrets = require('secrets.json');
+	secrets = require('secrets.json');
 	password = secrets.password;
 	} else {
 		password = process.env.PASSWORD;
 	}
 if (!process.env.USERNAME) {
-	let secrets = require('secrets.json');
+	secrets = require('secrets.json');
 	password = secrets.USERNAME;
 	} else {
 		password = process.env.USERNAME;

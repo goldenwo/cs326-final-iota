@@ -5,4 +5,7 @@ window.addEventListener("load", async function () {
             symbol: 'TSLA',
         })
     });
+    const jsonResponse = await response.json();
+    let price = jsonResponse.json().price;
+    let percentchange = jsonResponse.percentchange;
 });

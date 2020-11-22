@@ -18,7 +18,7 @@ app.use(express.static('app'));
 // Session configuration
 
 const session = {
-    secret : process.env.SECRET, // set this encryption key in Heroku config (never in GitHub)!
+    secret : process.env.SECRET || "SECRET", // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
     saveUninitialized: false
 };

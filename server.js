@@ -69,7 +69,7 @@ const pgp = require("pg-promise")({
         console.log('Disconnected from database:', client.connectionParameters.database);
     }
 });
-const url = process.env.DATABASE_URL || "postgres://powcrkcrnpbbzb:c2ec7aa8488758fbde1745685d1e0f0cee3a8b698cb7dee8cae68dc50046bc91@ec2-23-23-36-227.compute-1.amazonaws.com:5432/d3e8rpc484cq6";
+const url = process.env.DATABASE_URL;
 const db = pgp(url);
 
 async function connectAndRun(task) {

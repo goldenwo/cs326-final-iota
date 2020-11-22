@@ -156,7 +156,7 @@ function checkLoggedIn(req, res, next) {
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-	    res.send("Logged In!");
+	    res.send(res.params.userID);
 	});
 
 app.post('/login',

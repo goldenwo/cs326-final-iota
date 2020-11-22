@@ -18,7 +18,7 @@ app.use(express.static('app'));
 // Session configuration
 let thisSecret;
 if (!process.env.SECRET) {
-	secrets = require('secrets.json');
+	secrets = require('../secrets.json');
 	thisSecret = secrets.SECRET;
 	} else {
 		thisSecret = process.env.SECRET;
@@ -80,7 +80,7 @@ const pgp = require("pg-promise")({
 
 let url = process.env.DATABASE_URL;
 if (!process.env.DATABASE_URL) {
-	secrets = require('secrets.json');
+	secrets = require('../secrets.json');
 	url = secrets.DATABASE_URL;
 	} else {
 		url = process.env.DATABASE_URL;
@@ -107,13 +107,13 @@ let password;
 let secrets;
 
 if (!process.env.PASSWORD) {
-	secrets = require('secrets.json');
+	secrets = require('../secrets.json');
 	password = secrets.password;
 	} else {
 		password = process.env.PASSWORD;
 	}
 if (!process.env.USERNAME) {
-	secrets = require('secrets.json');
+	secrets = require('../secrets.json');
 	password = secrets.USERNAME;
 	} else {
 		password = process.env.USERNAME;

@@ -27,29 +27,10 @@ function validEntries() {
         return true;
     }
 }
- 
-async function sendUserData() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const response = await fetch('/register', {
-        method: 'POST',
-        body: JSON.stringify({
-            name: username,
-            password: password,
-            group: NULL
-        })
-    });
- 
-    if (!response.ok) {
-        console.error("Could not save the turn score to the server.");
-    }
-}
 window.addEventListener("load", async function () {
     document.getElementById("registerbutton").addEventListener("click", () => {
         if (validEntries()) {
-            sendUserData();
             alert("Successfully registered, please log in");
-            window.location.href = "login.html";
         }
         else {
             return;

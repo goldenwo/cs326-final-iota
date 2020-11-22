@@ -13,24 +13,32 @@ const { quote } = require('yahoo-finance');
 
 const mc = new minicrypt();
 
-app.use(express.static('html'));
+app.use(express.static('app'));
 
 // Session configuration
-
+let password;
+let secrets;
+let thisSecret;
+if (!process.env.SECRET) {
+	secrets = require('../secrets.json');
+	thisSecret = secrets.SECRET;
+	} else {
+		thisSecret = process.env.SECRET;
+	}
 const session = {
-    secret : process.env.SECRET, // set this encryption key in Heroku config (never in GitHub)!
+    secret : thisSecret, // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
     saveUninitialized: false
 };
 
 // Passport configuration
 
-const strategy = new LocalStrategy(async (username, password, done) => {
+const strategy = new LocalStrategy(async (username, pw, done) => {
 	if (!findUser(username)) {
 	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}
-	if (!validatePassword(username, password)) {
+	if (!validatePassword(username, pw)) {
 	    // invalid password
 	    // should disable logins after N messages
 	    // delay return to rate-limit brute-force attacks
@@ -72,7 +80,13 @@ const pgp = require("pg-promise")({
     }
 });
 
-const url = process.env.DATABASE_URL;
+let url = process.env.DATABASE_URL;
+if (!process.env.DATABASE_URL) {
+	secrets = require('../secrets.json');
+	url = secrets.DATABASE_URL;
+	} else {
+		url = process.env.DATABASE_URL;
+	}
 const db = pgp(url);
 
 async function connectAndRun(task) {
@@ -91,17 +105,15 @@ async function connectAndRun(task) {
         }
     }
 }
-let password;
-let username;
 
 if (!process.env.PASSWORD) {
-	let secrets = require('secrets.json');
+	secrets = require('../secrets.json');
 	password = secrets.password;
 	} else {
 		password = process.env.PASSWORD;
 	}
 if (!process.env.USERNAME) {
-	let secrets = require('secrets.json');
+	secrets = require('../secrets.json');
 	password = secrets.USERNAME;
 	} else {
 		password = process.env.USERNAME;
@@ -110,14 +122,14 @@ if (!process.env.USERNAME) {
 		
 	
 
-async function addUser(name, password, assigned_group) {
+async function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
 		return false;
 	}
-	let hashedPw = mc.hash(password);
+	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
-	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4, $5);", [name, password, salt, hash, assigned_group]));
+	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4, $5);", [name, pw, salt, hash, assigned_group]));
 	return true;
 }
 
@@ -177,7 +189,7 @@ function checkLoggedIn(req, res, next) {
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-	    res.send(res.params.userID);
+	    res.send(JSON.stringify({'username' : res.params.userID}));
 	});
 
 app.post('/login',
@@ -251,7 +263,7 @@ app.get("/addGroup", async (req, res) => {
 
 app.get("/getPortfolios", async (req, res) => {
     const portfolios = await getPortfolios();
-    res.end(JSON.stringify(portfolios));
+    res.send(JSON.stringify(portfolios));
 });
 
 app.get("/addPortfolio", async (req, res) => {
@@ -260,7 +272,7 @@ app.get("/addPortfolio", async (req, res) => {
 
 app.get("/stockInfo", async (req, res) => {
 	const result = await quote(req.query.symbol, ['price']);
-	res.end(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
+	res.send(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
 });
 
 app.listen(port);

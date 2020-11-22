@@ -30,14 +30,13 @@ This table holds the rankings information from the website. This includes the na
 | Column          | Data Type | Description                    |
 |-----------------|-----------|--------------------------------|
 | username        | text      | Username of user               |
-| password        | text      | Password of user               |
 | salt            | text      | Salt for password              |
 | hash            | text      | Encrypted vers of password     |
 | assigned_group  | text      | Which groups user is assigned  |
 
-This table holds all of the users information, which includes username, password, and assigned group. There are essential to determing users accounts and which group each user is in. There is a hash for the password which is used for password authentication. There is also an additional salt added onto the password which then alters the hash value. 
+This table holds all of the users information, which includes username, salt, hash, and assigned group. There are essential to determing users accounts and which group each user is in. There is a hash for the password which is used for password authentication. There is also an additional salt added onto the password which then alters the hash value. 
 
 # Division of Labor
-Golden Wo
+Golden Wo: Worked on implementing login features using passport and express session, helped work on implementing databases to the server, fixed some linking issues on different pages.
 Zachary Simonelli 
 William Parsons

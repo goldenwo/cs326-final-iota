@@ -39,4 +39,4 @@ This table holds all of the users information, which includes username, salt, ha
 # Division of Labor
 Golden Wo: Worked on implementing login features using passport and express session, helped work on implementing databases to the server, fixed some linking issues on different pages.
 Zachary Simonelli 
-William Parsons
+William Parsons: Worked on Heroku Implementation, Password problem, helped fix bugs with modules, Wrote Milestone 3.md

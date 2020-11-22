@@ -7,6 +7,8 @@ const expressSession = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const minicrypt = require('./miniCrypt');
+const yahooFinance = require('yahoo-finance');
+const { quote } = require('yahoo-finance');
 //static pages
 
 const mc = new minicrypt();
@@ -93,13 +95,13 @@ let password;
 let username;
 
 if (!process.env.PASSWORD) {
-	secrets = require('secrets.json');
+	let secrets = require('secrets.json');
 	password = secrets.password;
 	} else {
 		password = process.env.PASSWORD;
 	}
 if (!process.env.USERNAME) {
-	secrets = require('secrets.json');
+	let secrets = require('secrets.json');
 	password = secrets.USERNAME;
 	} else {
 		password = process.env.USERNAME;
@@ -255,6 +257,11 @@ app.get("/getPortfolios", async (req, res) => {
 app.get("/addPortfolio", async (req, res) => {
     await addPortfolio(req.query.name, req.query.author, req.query.stock, req.query.shares);
     res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.stock + ' ' + req.query.shares);
+});
+
+app.get("/stockInfo", async (req, res) => {
+	const result = await quote(req.query.symbol, ['price']);
+	res.send(result.price.regularMarketPrice + ' ' + result.price.regularMarketChangePercent);
 });
 
 app.listen(port);

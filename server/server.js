@@ -251,7 +251,7 @@ app.get("/addGroup", async (req, res) => {
 
 app.get("/getPortfolios", async (req, res) => {
     const portfolios = await getPortfolios();
-    res.end(JSON.stringify(portfolios));
+    res.send(JSON.stringify(portfolios));
 });
 
 app.get("/addPortfolio", async (req, res) => {
@@ -260,7 +260,7 @@ app.get("/addPortfolio", async (req, res) => {
 
 app.get("/stockInfo", async (req, res) => {
 	const result = await quote(req.query.symbol, ['price']);
-	res.end(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
+	res.send(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
 });
 
 app.listen(port);

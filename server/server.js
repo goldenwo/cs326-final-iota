@@ -14,7 +14,6 @@ const { quote } = require('yahoo-finance');
 
 const mc = new minicrypt();
 
-app.use(express.static('app'));
 
 // Session configuration
 let password;
@@ -43,7 +42,7 @@ const strategy = new LocalStrategy(async (username, pw, done) => {
 	    // invalid password
 	    // should disable logins after N messages
 	    // delay return to rate-limit brute-force attacks
-	    await new Promise((r) => setTimeout(r, 2000)); // two second delay
+	    await new Promise((r) => setTimeout(r, 500)); // 500ms delay
 	    return done(null, false, { 'message' : 'Wrong password' });
 	}
 	// success!
@@ -69,6 +68,7 @@ passport.deserializeUser((uid, done) => {
 
 app.use(express.json()); // allow JSON inputs
 app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
+app.use(express.static('app'));
 
 //Psql setup
 const pgp = require("pg-promise")({
@@ -130,7 +130,7 @@ async function addUser(name, pw, assigned_group) {
 	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
-	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4, $5);", [name, pw, salt, hash, assigned_group]));
+	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
 	return true;
 }
 
@@ -170,11 +170,12 @@ async function findUser(username) {
     return (Object.keys(await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username]))).length === 0); //if json object returned is not empty
 }
 
-function validatePassword(name, pwd) {
+async function validatePassword(name, pwd) {
     if (!findUser(name)) {
 	return false;
-    }
-	return mc.check(pwd, users[name][0], users[name][1]);
+	}
+	const passwordInfo = await connectionAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
+	return mc.check(pwd, passwordInfo.salt, passwordInfo.hash);
 }
 
 // Routes
@@ -195,12 +196,12 @@ app.get('/',
 
 app.post('/login',
 	 passport.authenticate('local' , {
-	     'successRedirect' : '/private',
-	     'failureRedirect' : '/login' 
+	     'successRedirect' : '/index.html',
+	     'failureRedirect' : '/login.html' 
 	 }));
 
 app.get('/login',
-	(req, res) => res.sendFile('html/login.html',
+	(req, res) => res.sendFile('login.html',
 				   { 'root' : __dirname }));
 
 app.get('/logout', (req, res) => {
@@ -220,7 +221,7 @@ app.post('/register',
 	 });
 
 app.get('/register',
-	(req, res) => res.sendFile('html/register.html',
+	(req, res) => res.sendFile('register.html',
 				   { 'root' : __dirname }));
 
 app.get('/private',
@@ -234,7 +235,7 @@ app.get('/private/:userID/',
 	(req, res) => {
 	    if (req.params.userID === req.user) {
 		res.writeHead(200, {"Content-Type" : "text/html"});
-		res.write('<H1>HELLO ' + req.params.userID + "</H1>");
+		res.write('<H1>Hello ' + req.params.userID + "</H1>");
 		res.write('<br/><a href="/logout">click here to logout</a>');
 		res.end();
 	    } else {

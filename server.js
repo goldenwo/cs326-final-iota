@@ -124,12 +124,12 @@ async function addGroup(groupName) {
     return await connectAndRun(db => db.any("INSERT INTO groups VALUES ($1);", [groupName]))
 }
 
-async function getPortfolios() {
-    return await connectAndRun(db => db.any("SELECT * FROM portfolios;"));
+async function findPortfolio(name, author) {
+    return await connectAndRun(db => db.any("SELECT * FROM portfolios WHERE name = $1 AND author = $2;", [name, author]));
 }
 
-async function addPortfolio(name, author, percentage) {
-    return await connectAndRun(db => db.any("INSERT INTO portfolios VALUES ($1, $2, $3);", [name, author, percentage]))
+async function addPortfolio(name, author, stock, shares) {
+    return await connectAndRun(db => db.any("INSERT INTO portfolios VALUES ($1, $2, $3, $4);", [name, author, stock, shares]))
 }
 
 async function findUser(username) {
@@ -234,8 +234,8 @@ app.get("/getPortfolios", async (req, res) => {
 });
 
 app.get("/addPortfolio", async (req, res) => {
-    await addPortfolio(req.query.name, req.query.author, req.query.percentage);
-    res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.percentage);
+    await addPortfolio(req.query.name, req.query.author, req.query.stock, req.query.shares);
+    res.send(req.query.name + ' ' + req.query.author + ' ' + req.query.stock + ' ' + req.query.shares);
 });
 
 app.listen(port);

@@ -110,14 +110,14 @@ if (!process.env.USERNAME) {
 		
 	
 
-async function addUser(name, password, assigned_group) {
+async function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
 		return false;
 	}
-	let hashedPw = mc.hash(password);
+	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
-	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4, $5);", [name, password, salt, hash, assigned_group]));
+	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4, $5);", [name, pw, salt, hash, assigned_group]));
 	return true;
 }
 

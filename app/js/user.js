@@ -16,7 +16,16 @@ window.addEventListener("load", async function () {
   autocomplete(document.getElementById('myInput'), tickerSymbols);
 
   document.getElementById('view-StockBtn').addEventListener('click', async () => {
+    let searchVal = document.getElementById('myInput').value;
+    let stockSymbol, stockName;
+    for (i = 0; i < tickerSymbols.length; i++) {
+      if(tickerSymbols[i].name === searchVal || tickerSymbols[i].symbol === searchVal){
+        stockName = tickerSymbols[i].name;
+        stockSymbol = tickerSymbols[i].symbol;
+      }
+    }
    
+    
   });
 
   const usernameResponse = await fetch("/");
@@ -117,7 +126,7 @@ function autocomplete(inp, arr) {
         b.innerHTML = "<strong>" + String(arr[i].symbol).substr(0, val.length) + "</strong>";
         b.innerHTML += String(arr[i].symbol).substr(val.length);
         /*insert a input field that will hold the current array item's value:*/
-        b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
+        b.innerHTML += "<input type='hidden' value='" + arr[i].symbol + "'>";
         /*execute a function when someone clicks on the item value (DIV element):*/
         b.addEventListener("click", function (e) {
           /*insert the value for the autocomplete text field:*/

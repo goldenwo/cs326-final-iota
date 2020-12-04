@@ -161,15 +161,18 @@ async function validatePassword(name, pwd) {
 
 function checkLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
-	next();
+		next();
     } else {
-	res.redirect('/login');
+		res.redirect('/login');
     }
 }
 
 app.get('/',
+	console.log("fetched GET /"),
 	checkLoggedIn,
+	console.log("authenticated"),
 	(req, res) => {
+		console.log("sending userID: " + req.params.userID);
 	    res.send(JSON.stringify({'username' : req.params.userID}));
 	});
 

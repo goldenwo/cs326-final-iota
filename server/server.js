@@ -116,6 +116,7 @@ if (!process.env.USERNAME) {
 //Helper functions for endpoints
 function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
+		console.log("User is found"); //debug
 		return false;
 	}
 	let hashedPw = mc.hash(pw);
@@ -156,7 +157,7 @@ async function addPortfolio(name, author, stock, shares) {
 
 function findUser(username) {
 	const response = getUser(username);
-	console.log(response);
+	console.log("This is the response in findUser: " + response); //debug
 	return (response !== undefined || response !== null);
 }
 
@@ -188,7 +189,7 @@ function checkLoggedIn(req, res, next) {
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-		console.log("sending userID: " + req.params.userID);
+		console.log("sending userID: " + req.params.userID); //debug
 	    res.send(JSON.stringify({'username' : req.params.userID}));
 	});
 

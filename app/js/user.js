@@ -34,27 +34,7 @@ window.addEventListener("load", async function () {
   console.log(usernameResponse);
   if (usernameResponse.ok && "username" in usernameResponse) { //if logged in
     const usernameObj = await usernameResponse.json();
-
-    let rankingsbutton = document.getElementById("buttonleft");
-    let a_rankings = document.createElement("a");
-    a_rankings.classList.add("btn");
-    a_rankings.classList.add("btn-primary");
-    a_rankings.classList.add("mx-2");
-    a_rankings.classList.add("border-0");
-    a_rankings.innerHTML = "Rankings";
-    a_rankings.href = "rankings.html";
-    rankingsbutton.appendChild(a_rankings);
-
-    let groupbutton = document.getElementById("buttonright");
-    let a_group = document.createElement("a");
-    a_group.classList.add("btn");
-    a_group.classList.add("btn-primary");
-    a_group.classList.add("mx-2");
-    a_group.classList.add("border-0");
-    a_group.innerHTML = "Groups";
-    a_group.href = "groups.html";
-    groupbutton.appendChild(a_group);
-
+    //show user button
     let navBar = document.getElementById("topbar");
     let a_navBar = document.createElement("a");
     a_navBar.classList.add("navbar-brand");
@@ -62,7 +42,7 @@ window.addEventListener("load", async function () {
     a_navBar.innerHTML = usernameObj.username;
     navBar.appendChild(a_navBar);
   }
-  else {
+  else { //show login/signupbuttons
     let loginbutton = document.getElementById("buttonleft");
     let a_login = document.createElement("a");
     a_login.classList.add("btn");

@@ -166,17 +166,20 @@ function checkLoggedIn(req, res, next) {
     }
 }
 
-// app.get('/',
-// 	checkLoggedIn,
-// 	(req, res) => {
-// 	    res.send(JSON.stringify({'username' : req.params.userID}));
-// 	});
+app.get('/',
+	checkLoggedIn,
+	(req, res) => {
+	    res.send(JSON.stringify({'username' : req.params.userID}));
+	});
 
 app.post('/login',
 	 passport.authenticate('local' , {
 	     'successRedirect' : '/index.html',
 	     'failureRedirect' : '/login.html' 
 	 }));
+
+app.get('/login',	
+	(req, res) => res.sendFile('login.html', { 'root' : __dirname }));
 
 app.get('/logout', (req, res) => {
     req.logout();
@@ -195,6 +198,9 @@ app.post('/register',
 			return;
 	     }
 	 });
+
+app.get('/register',	
+	(req, res) => res.sendFile('register.html',	{ 'root' : __dirname }));
 
 app.get('/private',
 	checkLoggedIn,
@@ -249,9 +255,9 @@ app.get("/stockInfo", async (req, res) => {
 	res.send(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
 });
 
-app.get('*', (req, res) => {
-    res.send('Error');
-});
+// app.get('*', (req, res) => {
+//     res.send('Error');
+// });
 
 app.listen(port);
 console.log("Server started on http://localhost:" + port);

@@ -14,7 +14,8 @@
 ## User Interface: A final up-to-date list/table describing your application’s user interface. This should include the name of the UI view and its purpose. You should include a screenshot of each of your UI views.
 
 ## APIs: A final up-to-date list/table describing your application’s API
-Database: A final up-to-date representation of your database including a brief description of each of the entities in your data model and their relationships if any.
+
+## Database: A final up-to-date representation of your database including a brief description of each of the entities in your data model and their relationships if any.
 
 ## URL Routes/Mappings: A final up-to-date table of all the URL routes that your application supports and a short description of what those routes are used for. You should also indicate any authentication and permissions on those routes.
 

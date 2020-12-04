@@ -2,7 +2,7 @@ function validEntries() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
- 
+
     if (username === null || username === "") {
         alert("Please enter a username");
         return false;

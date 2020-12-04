@@ -7,7 +7,6 @@ window.addEventListener("load", async function () {
         return;
     }
 
-    // We make dictionary a global.
     window.tickerSymbols = await response.json();
 
     document.getElementById('all-timeBtn').addEventListener('click', () => {
@@ -16,7 +15,7 @@ window.addEventListener("load", async function () {
 
     const usernameResponse = await fetch("/");
     console.log(usernameResponse);
-    if (usernameResponse.ok && "username" in usernameResponse) { //if logged in
+    if (usernameResponse.ok && "username" in usernameResponse) {
         const usernameObj = await usernameResponse.json();
 
         let rankingsbutton = document.getElementById("buttonleft");
@@ -68,4 +67,3 @@ window.addEventListener("load", async function () {
     }
 });
 
-// console.log(tickerSymbols);

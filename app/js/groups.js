@@ -1,17 +1,7 @@
 window.addEventListener("load", async function () {
-    // const response = await fetch('/stockInfo', {
-    //     method: 'GET',
-    //     body: JSON.stringify({
-    //         symbol: 'TSLA',
-    //     })
-    // });
-    // const jsonResponse = await response.json();
-    // let price = jsonResponse.json().price;
-    // let percentchange = jsonResponse.percentchange;
-
     const usernameResponse = await fetch("/");
     console.log(usernameResponse);
-    if (usernameResponse.ok && "username" in usernameResponse) { //if logged in
+    if (usernameResponse.ok && "username" in usernameResponse) {
     const usernameObj = await usernameResponse.json();
 
     let rankingsbutton = document.getElementById("buttonleft");

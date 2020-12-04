@@ -9,9 +9,13 @@ const LocalStrategy = require('passport-local').Strategy;
 const minicrypt = require('./miniCrypt');
 const yahooFinance = require('yahoo-finance');
 const { quote } = require('yahoo-finance');
+//static pages
+
 
 const mc = new minicrypt();
 
+
+// Session configuration
 let password;
 let secrets;
 let thisSecret;
@@ -22,38 +26,51 @@ if (!process.env.SECRET) {
 		thisSecret = process.env.SECRET;
 	}
 const session = {
-    secret : thisSecret,
+    secret : thisSecret, // set this encryption key in Heroku config (never in GitHub)!
     resave : false,
     saveUninitialized: false
 };
 
+// Passport configuration
+
 const strategy = new LocalStrategy(async (username, pw, done) => {
 	if (!findUser(username)) {
+	    // no such user
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}
 	if (!validatePassword(username, pw)) {
-	    await new Promise((r) => setTimeout(r, 500));
+	    // invalid password
+	    // should disable logins after N messages
+	    // delay return to rate-limit brute-force attacks
+	    await new Promise((r) => setTimeout(r, 500)); // 500ms delay
 	    return done(null, false, { 'message' : 'Wrong password' });
 	}
+	// success!
+	// should create a user object here, associated with a unique identifier
 	return done(null, username);
 });
+
+// App configuration
 
 app.use(expressSession(session));
 passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Convert user object to a unique identifier.
 passport.serializeUser((user, done) => {
     done(null, user);
 });
+// Convert a unique identifier to a user object.
 passport.deserializeUser((uid, done) => {
     done(null, uid);
 });
 
-app.use(express.json());
-app.use(express.urlencoded({'extended' : true}));
+app.use(express.json()); // allow JSON inputs
+app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
 app.use(express.static('app'));
 
+//Psql setup
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -102,6 +119,9 @@ if (!process.env.USERNAME) {
 	} else {
 		password = process.env.USERNAME;
 	}
+
+		
+	
 
 async function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
@@ -158,18 +178,20 @@ async function validatePassword(name, pwd) {
 	return mc.check(pwd, passwordInfo.salt, passwordInfo.hash);
 }
 
+// Routes
+
 function checkLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
 	next();
     } else {
-	res.redirect('/');
+	res.redirect('/login');
     }
 }
 
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-	    res.send(JSON.stringify({'username' : req.params.userID}));
+	    res.send(JSON.stringify({'username' : res.params.userID}));
 	});
 
 app.post('/login',
@@ -178,29 +200,29 @@ app.post('/login',
 	     'failureRedirect' : '/login.html' 
 	 }));
 
-app.get('/login',	
-	(req, res) => res.sendFile('login.html', { 'root' : __dirname }));
+app.get('/login',
+	(req, res) => res.sendFile('login.html',
+				   { 'root' : __dirname }));
 
 app.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/login.html');
+    res.redirect('/login');
 });
 
 app.post('/register',
 	 (req, res) => {
 	     const username = req.body['username'];
-	     const tpassword = req.body['password'];
-	     if (await addUser(username, tpassword)) {
-			res.redirect('/login.html');
-			return;
+	     const password = req.body['password'];
+	     if (addUser(username, password)) {
+		 res.redirect('/login');
 	     } else {
-			res.redirect('/register.html');
-			return;
+		 res.redirect('/register');
 	     }
 	 });
 
-app.get('/register',	
-	(req, res) => res.sendFile('register.html',	{ 'root' : __dirname }));
+app.get('/register',
+	(req, res) => res.sendFile('register.html',
+				   { 'root' : __dirname }));
 
 app.get('/private',
 	checkLoggedIn,
@@ -254,10 +276,6 @@ app.get("/stockInfo", async (req, res) => {
 	const result = await quote(req.query.symbol, ['price']);
 	res.send(JSON.stringify({'price': result.price.regularMarketPrice, 'percentchange': result.price.regularMarketChangePercent}));
 });
-
-// app.get('*', (req, res) => {
-//     res.send('Error');
-// });
 
 app.listen(port);
 console.log("Server started on http://localhost:" + port);

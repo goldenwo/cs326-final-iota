@@ -165,7 +165,7 @@ async function validatePassword(name, pwd) {
     if (!findUser(name)) {
 	return false;
 	}
-	const passwordInfo = await connectionAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
+	const passwordInfo = await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
 	return mc.check(pwd, passwordInfo.salt, passwordInfo.hash);
 }
 
@@ -203,7 +203,7 @@ app.post('/register',
 	 (req, res) => {
 	     const username = req.body['username'];
 	     const password = req.body['password'];
-	     if (addUser(username, password, null)) {
+	     if (await addUser(username, password, null)) {
 		 res.redirect('/login.html');
 	     } else {
 		 res.redirect('/register.html');

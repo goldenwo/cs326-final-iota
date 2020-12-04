@@ -32,13 +32,13 @@ const session = {
 const strategy = new LocalStrategy(async (username, pw, done) => {
 	//finds user and validates password after 500ms delay
 	if (!findUser(username)) {
-	    return done(NULL, false, { 'message' : 'Wrong username' });
+	    return done(null, false, { 'message' : 'Wrong username' });
 	}
 	if (!validatePassword(username, pw)) {
 	    await new Promise((r) => setTimeout(r, 500));
-	    return done(NULL, false, { 'message' : 'Wrong password' });
+	    return done(null, false, { 'message' : 'Wrong password' });
 	}
-	return done(NULL, username);
+	return done(null, username);
 });
 
 //App configuration
@@ -49,11 +49,11 @@ app.use(passport.session());
 
 // Convert user object to a unique identifier.
 passport.serializeUser((user, done) => {
-    done(NULL, user);
+    done(null, user);
 });
 // Convert a unique identifier to a user object.
 passport.deserializeUser((uid, done) => {
-    done(NULL, uid);
+    done(null, uid);
 });
 
 app.use(express.json()); // allow JSON inputs
@@ -82,7 +82,7 @@ if (!process.env.DATABASE_URL) {
 const db = pgp(url);
 
 async function connectAndRun(task) {
-    let connection = NULL;
+    let connection = null;
 
     try {
 		connection = await db.connect();
@@ -157,7 +157,7 @@ async function addPortfolio(name, author, stock, shares) {
 function findUser(username) {
 	const response = getUser(username);
 	console.log(response);
-	return (response !== undefined || response !== NULL);
+	return (response !== undefined || response !== null);
 }
 
 async function getUser(username) {
@@ -210,7 +210,7 @@ app.post('/register',
 	 (req, res) => {
 	     const username = req.body['username'];
 	     const password = req.body['password'];
-	     if (addUser(username, password, NULL)) {
+	     if (addUser(username, password, null)) {
 		 res.redirect('/login.html');
 	     } else {
 		 res.redirect('/register.html');

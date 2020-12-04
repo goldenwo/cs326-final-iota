@@ -203,7 +203,7 @@ app.post('/register',
 	 (req, res) => {
 	     const username = req.body['username'];
 	     const password = req.body['password'];
-	     if (await addUser(username, password, null)) {
+	     if (addUser(username, password, null)) {
 		 res.redirect('/login.html');
 	     } else {
 		 res.redirect('/register.html');

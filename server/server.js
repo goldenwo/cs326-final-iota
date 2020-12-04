@@ -114,13 +114,19 @@ if (!process.env.USERNAME) {
 	}
 
 //Helper functions for endpoints
-async function addUser(name, pw, assigned_group) {
+function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
-		return;
+		return false;
 	}
 	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
+	insertUser(name, salt, hash, assigned_group);
+	connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
+	return true;
+}
+
+async function insertUser(name, salt, hash, assigned_group) {
 	return await connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
 }
 
@@ -129,12 +135,6 @@ async function getRankings() {
 }
 
 async function addRanking(name, percentage) {
-	const response = await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name])).then((result) => {
-		return result;
-	});
-	if (response !== null) {
-		return false;
-	}
 	return await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
 }
 
@@ -154,19 +154,25 @@ async function addPortfolio(name, author, stock, shares) {
     return await connectAndRun(db => db.any("INSERT INTO portfolios (name, author, stock, shares) VALUES ($1, $2, $3, $4);", [name, author, stock, shares]))
 }
 
-async function findUser(username) {
-	const response = await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username])).then((result) => {
-		return result;
-	}); 
-	return (response !== null); //if json object returned is not empty
+function findUser(username) {
+	const response = getUser(username);
+	return (response !== undefined || response !== null);
 }
 
-async function validatePassword(name, pwd) {
+async function getUser(username) {
+	return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username]));
+}
+
+function validatePassword(name, pwd) {
     if (!findUser(name)) {
-	return false;
+		return false;
 	}
-	const passwordInfo = await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
+	const passwordInfo = getPasswordInfo(name);
 	return mc.check(pwd, passwordInfo.salt, passwordInfo.hash);
+}
+
+async function getPasswordInfo(name) {
+	return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
 }
 
 function checkLoggedIn(req, res, next) {

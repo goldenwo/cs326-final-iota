@@ -116,17 +116,12 @@ if (!process.env.USERNAME) {
 //Helper functions for endpoints
 async function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
-		return false;
+		return;
 	}
 	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
-	await connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
-	return true;
-}
-
-async function getUser(name) {
-    return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1", [name]));
+	return await connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
 }
 
 async function getRankings() {
@@ -137,8 +132,7 @@ async function addRanking(name, percentage) {
 	if (Object.keys(await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name]))).length === 0) {
 		return false;
 	}
-	await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
-	return true;
+	return await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
 }
 
 async function getGroups() {

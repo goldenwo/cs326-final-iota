@@ -85,8 +85,9 @@ async function connectAndRun(task) {
     let connection = null;
 
     try {
-        connection = await db.connect();
-        return await task(connection);
+		connection = await db.connect();
+		console.log("db task: " + task); //debug
+		return await task(connection);
     } catch (e) {
         throw e;
     } finally {
@@ -115,17 +116,12 @@ if (!process.env.USERNAME) {
 //Helper functions for endpoints
 async function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
-		return false;
+		return;
 	}
 	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
-	await connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
-	return true;
-}
-
-async function getUser(name) {
-    return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1", [name]));
+	return await connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
 }
 
 async function getRankings() {
@@ -133,11 +129,13 @@ async function getRankings() {
 }
 
 async function addRanking(name, percentage) {
-	if (Object.keys(await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name]))).length === 0) {
+	const response = await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name])).then((result) => {
+		return result;
+	});
+	if (response !== null) {
 		return false;
 	}
-	await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
-	return true;
+	return await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
 }
 
 async function getGroups() {
@@ -157,14 +155,17 @@ async function addPortfolio(name, author, stock, shares) {
 }
 
 async function findUser(username) {
-    return (Object.keys(await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username]))).length === 0); //if json object returned is not empty
+	const response = await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username])).then((result) => {
+		return result;
+	}); 
+	return (response !== null); //if json object returned is not empty
 }
 
 async function validatePassword(name, pwd) {
     if (!findUser(name)) {
 	return false;
 	}
-	const passwordInfo = await connectionAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
+	const passwordInfo = await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
 	return mc.check(pwd, passwordInfo.salt, passwordInfo.hash);
 }
 
@@ -172,7 +173,7 @@ function checkLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
 		next();
     } else {
-		res.redirect('/login');
+		res.redirect('/login.html');
     }
 }
 

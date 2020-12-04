@@ -120,7 +120,7 @@ async function addUser(name, pw, assigned_group) {
 	let hashedPw = mc.hash(pw);
 	let salt = hashedPw[0];
 	let hash = hashedPw[1];
-	await connectAndRun(db => db.any("INSERT INTO users VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
+	await connectAndRun(db => db.any("INSERT INTO users (name, salt, hash, assigned_group) VALUES ($1, $2, $3, $4);", [name, salt, hash, assigned_group]));
 	return true;
 }
 
@@ -136,7 +136,7 @@ async function addRanking(name, percentage) {
 	if (Object.keys(await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name]))).length === 0) {
 		return false;
 	}
-	await connectAndRun(db => db.any("INSERT INTO rankings VALUES ($1, $2);", [name, percentage]));
+	await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
 	return true;
 }
 
@@ -145,7 +145,7 @@ async function getGroups() {
 }
 
 async function addGroup(groupName) {
-    return await connectAndRun(db => db.any("INSERT INTO groups VALUES ($1);", [groupName]))
+    return await connectAndRun(db => db.any("INSERT INTO groups (name) VALUES ($1);", [groupName]))
 }
 
 async function findPortfolio(name, author) {
@@ -153,7 +153,7 @@ async function findPortfolio(name, author) {
 }
 
 async function addPortfolio(name, author, stock, shares) {
-    return await connectAndRun(db => db.any("INSERT INTO portfolios VALUES ($1, $2, $3, $4);", [name, author, stock, shares]))
+    return await connectAndRun(db => db.any("INSERT INTO portfolios (name, author, stock, shares) VALUES ($1, $2, $3, $4);", [name, author, stock, shares]))
 }
 
 async function findUser(username) {

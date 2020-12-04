@@ -166,11 +166,11 @@ function checkLoggedIn(req, res, next) {
     }
 }
 
-app.get('/',
-	checkLoggedIn,
-	(req, res) => {
-	    res.send(JSON.stringify({'username' : req.params.userID}));
-	});
+// app.get('/',
+// 	checkLoggedIn,
+// 	(req, res) => {
+// 	    res.send(JSON.stringify({'username' : req.params.userID}));
+// 	});
 
 app.post('/login',
 	 passport.authenticate('local' , {

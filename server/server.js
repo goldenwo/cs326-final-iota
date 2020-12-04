@@ -175,17 +175,16 @@ app.get('/',
 
 app.post('/login',
 	 passport.authenticate('local' , {
-	     'successRedirect' : '../index.html',
-	     'failureRedirect' : '../login.html' 
+	     'successRedirect' : '/index.html',
+	     'failureRedirect' : '/login.html' 
 	 }));
 
 app.get('/login',
-	(req, res) => res.sendFile('../login.html',
-				   { 'root' : __dirname }));
+	(req, res) => res.redirect('/login.html'));
 
 app.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/login');
+    res.redirect('/login.html');
 });
 
 app.post('/register',
@@ -193,15 +192,14 @@ app.post('/register',
 	     const username = req.body['username'];
 	     const password = req.body['password'];
 	     if (addUser(username, password)) {
-		 res.redirect('/login');
+		 res.redirect('/login.html');
 	     } else {
-		 res.redirect('/register');
+		 res.redirect('/register.html');
 	     }
 	 });
 
 app.get('/register',
-	(req, res) => res.sendFile('../register.html',
-				   { 'root' : __dirname }));
+	(req, res) => res.redirect('/register.html'));
 
 app.get('/private',
 	checkLoggedIn,

@@ -129,7 +129,10 @@ async function getRankings() {
 }
 
 async function addRanking(name, percentage) {
-	if (Object.keys(await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name]))).length === 0) {
+	const response = await connectAndRun(db => db.any("SELECT * FROM rankings VALUES ($1);", [name])).then((result) => {
+		return result;
+	});
+	if (response !== null) {
 		return false;
 	}
 	return await connectAndRun(db => db.any("INSERT INTO rankings (name, percentage) VALUES ($1, $2);", [name, percentage]));
@@ -152,7 +155,10 @@ async function addPortfolio(name, author, stock, shares) {
 }
 
 async function findUser(username) {
-    return (Object.keys(await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username]))).length === 0); //if json object returned is not empty
+	const response = await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username])).then((result) => {
+		return result;
+	}); 
+	return (response !== null); //if json object returned is not empty
 }
 
 async function validatePassword(name, pwd) {

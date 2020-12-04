@@ -85,8 +85,9 @@ async function connectAndRun(task) {
     let connection = null;
 
     try {
-        connection = await db.connect();
-        return await task(connection);
+		connection = await db.connect();
+		console.log("db task: " + task); //debug
+		return await task(connection);
     } catch (e) {
         throw e;
     } finally {
@@ -172,7 +173,7 @@ function checkLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
 		next();
     } else {
-		res.redirect('/login');
+		res.redirect('/login.html');
     }
 }
 

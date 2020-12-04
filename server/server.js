@@ -12,6 +12,7 @@ const { quote } = require('yahoo-finance');
 
 const mc = new minicrypt();
 
+//Secrets
 let password;
 let secrets;
 let thisSecret;
@@ -27,8 +28,9 @@ const session = {
     saveUninitialized: false
 };
 
-
+// Passport configuration
 const strategy = new LocalStrategy(async (username, pw, done) => {
+	//finds user and validates password after 500ms delay
 	if (!findUser(username)) {
 	    return done(null, false, { 'message' : 'Wrong username' });
 	}
@@ -39,22 +41,26 @@ const strategy = new LocalStrategy(async (username, pw, done) => {
 	return done(null, username);
 });
 
+//App configuration
 app.use(expressSession(session));
 passport.use(strategy);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Convert user object to a unique identifier.
 passport.serializeUser((user, done) => {
     done(null, user);
 });
+// Convert a unique identifier to a user object.
 passport.deserializeUser((uid, done) => {
     done(null, uid);
 });
 
-app.use(express.json());
-app.use(express.urlencoded({'extended' : true}));
-app.use(express.static('app'));
+app.use(express.json()); // allow JSON inputs
+app.use(express.urlencoded({'extended' : true})); // allow URLencoded data
+app.use(express.static('app')); //Serves static files through app
 
+//Psql setup
 const pgp = require("pg-promise")({
     connect(client) {
         console.log('Connected to database:', client.connectionParameters.database);
@@ -65,6 +71,7 @@ const pgp = require("pg-promise")({
     }
 });
 
+//Heroku database configs
 let url = process.env.DATABASE_URL;
 if (!process.env.DATABASE_URL) {
 	secrets = require('../secrets.json');
@@ -91,6 +98,7 @@ async function connectAndRun(task) {
     }
 }
 
+//Initializes env variables if run locally
 if (!process.env.PASSWORD) {
 	secrets = require('../secrets.json');
 	password = secrets.password;
@@ -104,6 +112,7 @@ if (!process.env.USERNAME) {
 		password = process.env.USERNAME;
 	}
 
+//Helper functions for endpoints
 async function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
 		return false;
@@ -167,6 +176,7 @@ function checkLoggedIn(req, res, next) {
     }
 }
 
+// Routes
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {

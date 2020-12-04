@@ -155,7 +155,8 @@ async function addPortfolio(name, author, stock, shares) {
 }
 
 function findUser(username) {
-	return (getUser(username) !== NULL);
+	const response = getUser(username);
+	return (reponse !== undefined || response !== null);
 }
 
 async function getUser(username) {

@@ -162,14 +162,14 @@ function checkLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
 	next();
     } else {
-	res.redirect('/login');
+	res.redirect('/');
     }
 }
 
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-	    res.send(JSON.stringify({'username' : res.params.userID}));
+	    res.send(JSON.stringify({'username' : req.params.userID}));
 	});
 
 app.post('/login',

@@ -2,6 +2,7 @@
 
 # Database Documentation 
 1. Groups
+
 | Column       | Data Type | Description                    |
 |--------------|-----------|--------------------------------|
 | name         | text      | The name of the group          |
@@ -9,6 +10,7 @@
 This table stores the name of the specific group that any number of users could be apart of. 
 
 2. Portfolios
+
 | Column       | Data Type | Description                    |
 |--------------|-----------|--------------------------------|
 | name         | text      | The name of the portfolio      |
@@ -19,6 +21,7 @@ This table stores the name of the specific group that any number of users could 
 This table holds all of the portfolio information needed. This includes the name of the portfolio, the investor behind it, the stocks in the portfolio and the number of shares associated with each stock. These will be used to show users specific portfolios where they will be able to see more details that explains the user's percentage gain or loss.
 
 3. Rankings
+
 | Column       | Data Type | Description                    |
 |--------------|-----------|--------------------------------|
 | name         | text      | The name of the investor       |
@@ -27,6 +30,7 @@ This table holds all of the portfolio information needed. This includes the name
 This table holds the rankings information from the website. This includes the names of all of the individual investors which are all linked to a percentage integer. This can be used to rank the user based off of positive percentage gain in the stock market off of their investments. 
 
 4. Users
+
 | Column          | Data Type | Description                    |
 |-----------------|-----------|--------------------------------|
 | username        | text      | Username of user               |

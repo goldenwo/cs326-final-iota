@@ -168,9 +168,7 @@ function checkLoggedIn(req, res, next) {
 }
 
 app.get('/',
-	console.log("fetched GET /"),
 	checkLoggedIn,
-	console.log("authenticated"),
 	(req, res) => {
 		console.log("sending userID: " + req.params.userID);
 	    res.send(JSON.stringify({'username' : req.params.userID}));

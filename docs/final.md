@@ -5,6 +5,9 @@
 ## Fall 2020 
 
 ## Overview: A brief overview of your application. This will be based on what you are submitting as your final web application artifact. You should also mention why your application is innovative.
+Stonks is a website that allows the user to track their stock portfolio and see how it is performing. The user is be able to create an account and log in. They will be able to see rankings of other user's portfolios compared to theirs. On the sidebars they will also be able to see trending portfolios and track their own portfolio.
+
+One unique way that Stonks is different compared to other investing sites is the groups page that has the different groups of investors that the user is currently in. 
 
 ## Team Members: 
 - Golden Wo: @goldenwo

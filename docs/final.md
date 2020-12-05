@@ -109,7 +109,7 @@ This table holds all of the users information, which includes username, salt, ha
 5. Groups : https://cs326-final-iota.herokuapp.com/groups.html
 6. User Information : https://cs326-final-iota.herokuapp.com/user.html
 
-## Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
+## Authentication/Authorization:
 
 Users are authenticated using the passport api that we learned from class. Each user would first register on the registration page, then javascript code runs to ensure all fields are valid. Afterwards, it sends the information to our endpoint and updates the database with the information. For the login, it compares the information retreived from the database that matches the login username to the hashed password and salt using miniCrpyt.js. The user.html page would not be accessible until the user logged on and is authenticated.
 
@@ -141,4 +141,6 @@ Golden Wo:
 - Worked on creating sidebars of our pages
 - Worked on creating css file for our pages
 
-## Conclusion: A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
+## Conclusion: 
+
+Our group's experience working on this semester's project was that we learned a lot while working on it while at the same time it was pretty difficult. Creating all parts of the web design process and combining them all together was not an easy task. This project helped us see how all of these aspects all worked together to create a final product. We thought the design and layout was easier to work with, and the javascript gave us some trouble once we started trying to integrate the website with the database. The harder parts of the project were our difficulties working on the yahoo finance API. There was little support from the developers and ultimately we did not get it working which was a large part of our proposal for the interactive website. Dealing with async functions, promises, and updating the databases was hard for us. We didn’t really understand how async functions returned data, especially using pg promises and database queries. The login functionality took us a bit of time to figure out too due to how confusing the database integration was. Another factor that added to the confusion was how information was sent back and forth through endpoints using res.send and other similar functions. Overall, most issues we faced were server-sided, while the client sided things were easier to work with. If we were to continue working on this project we would work to get the stock api to function which would greatly benefit the whole website's functionality. 

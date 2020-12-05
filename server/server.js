@@ -86,7 +86,6 @@ async function connectAndRun(task) {
 
     try {
 		connection = await db.connect();
-		console.log("db task: " + task); //debug
 		return await task(connection);
     } catch (e) {
         throw e;
@@ -116,7 +115,6 @@ if (!process.env.USERNAME) {
 //Helper functions for endpoints
 function addUser(name, pw, assigned_group) {
 	if (findUser(name)) {
-		console.log("User is found"); //debug
 		return false;
 	}
 	let hashedPw = mc.hash(pw);
@@ -163,8 +161,6 @@ async function addPortfolio(name, author, stock, shares) {
 
 function findUser(username) {
 	const response = getUser(username);
-	console.log("This is the response in findUser: " + response); //debug
-	console.log("Username of findUserResponse: " + response.name); //debug
 	return (response.name !== undefined || response.name != null);
 }
 
@@ -200,7 +196,6 @@ function checkLoggedIn(req, res, next) {
 app.get('/',
 	checkLoggedIn,
 	(req, res) => {
-		console.log("sending userID: " + req.params.userID); //debug
 	    res.send(JSON.stringify({'username' : req.params.userID}));
 	});
 

@@ -165,7 +165,7 @@ function findUser(username) {
 	const response = getUser(username);
 	console.log("This is the response in findUser: " + response); //debug
 	console.log("Username of findUserResponse: " + response.username); //debug
-	return (response !== undefined || response != null);
+	return (response.username !== undefined || response.username != null);
 }
 
 async function getUser(username) {

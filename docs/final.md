@@ -109,7 +109,7 @@ This table holds all of the users information, which includes username, salt, ha
 5. Groups : https://cs326-final-iota.herokuapp.com/groups.html
 6. User Information : https://cs326-final-iota.herokuapp.com/user.html
 
-## Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
+## Authentication/Authorization:
 
 Users are authenticated using the passport api that we learned from class. Each user would first register on the registration page, then javascript code runs to ensure all fields are valid. Afterwards, it sends the information to our endpoint and updates the database with the information. For the login, it compares the information retreived from the database that matches the login username to the hashed password and salt using miniCrpyt.js. The user.html page would not be accessible until the user logged on and is authenticated.
 

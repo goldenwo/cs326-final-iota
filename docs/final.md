@@ -36,6 +36,10 @@ This is the rankings page where users can see how they match up against other us
 ![Groups](final_img/Groups.png)
 This is the groups page where users can see groups they are apart. The sidebar is still visible on this page.
 
+## User
+![User](final_img/User.png)
+This is the user page where users can search any stocks on the market. 
+
 ## APIs: A final up-to-date list/table describing your application’s API
 
 ## Database:
@@ -96,7 +100,8 @@ William Parsons:
 - Provided explanations for wireframe / pages, helped edit wireframes. 
 - Helped create login.js
 - Helped create register.js
-- Worked on Heroku Implementation and bug fixes
+- Connected github repo to Heroku + deployed and worked on bug fixes
 - Helped write all milestones
+- Added rubric material and instructions to setup.md
 
 ## Conclusion: A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.

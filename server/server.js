@@ -164,8 +164,8 @@ async function addPortfolio(name, author, stock, shares) {
 function findUser(username) {
 	const response = getUser(username);
 	console.log("This is the response in findUser: " + response); //debug
-	console.log("Username of findUserResponse: " + response.username); //debug
-	return (response.username !== undefined || response.username != null);
+	console.log("Username of findUserResponse: " + response.name); //debug
+	return (response.name !== undefined || response.name != null);
 }
 
 async function getUser(username) {

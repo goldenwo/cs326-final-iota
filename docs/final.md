@@ -107,6 +107,14 @@ William Parsons:
 - Helped write all milestones
 - Added rubric material and instructions to setup.md
 
+Zachary Simonelli:
+- Helped design wireframes
+- Coded user.js
+- Helped design/code all html pages
+- Linked html pages
+- Helped with server communication
+- Worked on styling through css and bootstrap
+
 Golden Wo:
 - Worked on server-sided enpoints
 - Worked on login/registration functions

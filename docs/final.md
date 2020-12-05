@@ -42,6 +42,23 @@ This is the user page where users can search any stocks on the market.
 
 ## APIs: A final up-to-date list/table describing your application’s API
 
+| API Route       | Description                                                                        |
+|-----------------|------------------------------------------------------------------------------------|
+| /               | Checks for logged in user and sends userID as a response                           |
+| /login          | GET: redirects to login.html, POST: authenticates login info and redirects         |
+| /logout         | Logs user out and redirects to login.html                                          |
+| /register       | GET: redirects to register.html, POST: adds user to database and redirects         |
+| /private        | Checks for logged in user and redirects to user page                               |
+| /priate/:userID | Checks for logged in user and shows logout button, if not logged in, redirect      |
+| /getRankings    | Sends a stringified JSON object of all rankings to response                        |
+| /addRanking     | Adds a ranking from a name and percentage to the rankings database                 |
+| /getGroups      | Sends a stringified JSON object of all groups to response                          |
+| /addGroup       | Adds a group from a name to the groups database                                    |
+| /getPorfolios   | Sends a stringified JSON object of all portfolios to response                      |
+| /addPortfolio   | Adds a portfolio from a name, author, stock, and shares to the portfolios database |
+| /stockInfo      | Takes an input of a stock symbol and sends back the price and percent change info  |
+| *               | Sends an error to all pages and endpoints that does not exist                      |
+
 ## Database:
 
 1. Groups

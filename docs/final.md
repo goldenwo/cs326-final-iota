@@ -17,19 +17,19 @@ One unique way that Stonks is different compared to other investing sites is the
 ## User Interface:
 
 ## Index
-![Index](final_img/Index.png)
+![Index](final_img/index.png)
 Homepage is the landing page for our website. This is where users start off and can then login or create an account.
 
 ## Login
-![Login](final_img/Login.png)
+![Login](final_img/login.png)
 This is where users login to our website.
 
 ## Register
-![Register](final_img/Register.png)
+![Register](final_img/register.png)
 This is where users can create an account. If successfull in creating an account, the site will prompt user to login.
 
 ## Rankings 
-![Rankings](final_img/Rankings.png)
+![Rankings](final_img/rankings.png)
 This is the rankings page where users can see how they match up against other users. There is also sidebars where you can see trending portfolios and your own portfolio.
 
 ## Groups

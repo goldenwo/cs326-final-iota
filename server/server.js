@@ -132,7 +132,9 @@ async function insertUser(name, salt, hash, assigned_group) {
 }
 
 async function getRankings() {
-    return await connectAndRun(db => db.any("SELECT * FROM rankings;"));
+    return await connectAndRun(db => db.any("SELECT * FROM rankings;")).then((result) => {
+		return result;
+	});
 }
 
 async function addRanking(name, percentage) {
@@ -140,7 +142,9 @@ async function addRanking(name, percentage) {
 }
 
 async function getGroups() {
-    return await connectAndRun(db => db.any("SELECT * FROM groups;"));
+    return await connectAndRun(db => db.any("SELECT * FROM groups;")).then((result) => {
+		return result;
+	});
 }
 
 async function addGroup(groupName) {
@@ -148,7 +152,9 @@ async function addGroup(groupName) {
 }
 
 async function findPortfolio(name, author) {
-    return await connectAndRun(db => db.any("SELECT * FROM portfolios WHERE name = $1 AND author = $2;", [name, author]));
+    return await connectAndRun(db => db.any("SELECT * FROM portfolios WHERE name = $1 AND author = $2;", [name, author])).then((result) => {
+		return result;
+	});
 }
 
 async function addPortfolio(name, author, stock, shares) {
@@ -158,11 +164,14 @@ async function addPortfolio(name, author, stock, shares) {
 function findUser(username) {
 	const response = getUser(username);
 	console.log("This is the response in findUser: " + response); //debug
-	return (response !== undefined || response !== null);
+	console.log("Username of findUserResponse: " + response.username); //debug
+	return (response !== undefined || response != null);
 }
 
 async function getUser(username) {
-	return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username]));
+	return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;", [username])).then((result) => {
+		return result;
+	});
 }
 
 function validatePassword(name, pwd) {
@@ -174,7 +183,9 @@ function validatePassword(name, pwd) {
 }
 
 async function getPasswordInfo(name) {
-	return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name]));
+	return await connectAndRun(db => db.any("SELECT * FROM users WHERE name = $1;" [name])).then((result) => {
+		return result;
+	});
 }
 
 function checkLoggedIn(req, res, next) {

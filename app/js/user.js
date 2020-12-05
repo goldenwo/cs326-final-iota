@@ -18,14 +18,16 @@ window.addEventListener("load", async function () {
   document.getElementById('view-StockBtn').addEventListener('click', async () => {
     let searchVal = document.getElementById('myInput').value;
     let stockSymbol, stockName;
+
+    //for loop to obtain the companies name and symbol
     for (i = 0; i < tickerSymbols.length; i++) {
       if(tickerSymbols[i].name === searchVal || tickerSymbols[i].symbol === searchVal){
         stockName = tickerSymbols[i].name;
         stockSymbol = tickerSymbols[i].symbol;
+        break;//break statement to prevent from unnecessarily iterating through all of tickerSymbols
       }
     }
-   
-    
+
   });
 
   const usernameResponse = await fetch("/");

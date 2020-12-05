@@ -10,7 +10,7 @@
 - CRUD API utilized to send data to database
 
 ## Authorization / Authentication
-- Implemented a password hashing mechanism
+- Implemented a password hashing and salt mechanism
 - Password encryption sent to database
 - Implemented an authentication mechanism
 - No authentication flaws within signing in and password management

@@ -26,7 +26,7 @@ This is where users login to our website.
 
 ## Register
 ![Register](final_img/register.png)
-This is where users can create an account. If successfull in creating an account, the site will prompt user to login.
+This is where users can create an account. If successful in creating an account, the site will prompt user to login.
 
 ## Rankings 
 ![Rankings](final_img/rankings.png)

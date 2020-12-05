@@ -90,8 +90,11 @@ This table holds all of the users information, which includes username, salt, ha
 3. Register : https://cs326-final-iota.herokuapp.com/register.html
 4. Rankings : https://cs326-final-iota.herokuapp.com/rankings.html
 5. Groups : https://cs326-final-iota.herokuapp.com/groups.html
+6. User Information : https://cs326-final-iota.herokuapp.com/user.html
 
 ## Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
+
+Users are authenticated using the passport api that we learned from class. Each user would first register on the registration page, then javascript code runs to ensure all fields are valid. Afterwards, it sends the information to our endpoint and updates the database with the information. For the login, it compares the information retreived from the database that matches the login username to the hashed password and salt using miniCrpyt.js. The user.html page would not be accessible until the user logged on and is authenticated.
 
 ## Division of Labor: 
 William Parsons: 
@@ -103,5 +106,14 @@ William Parsons:
 - Connected github repo to Heroku + deployed and worked on bug fixes
 - Helped write all milestones
 - Added rubric material and instructions to setup.md
+
+Golden Wo:
+- Worked on server-sided enpoints
+- Worked on login/registration functions
+- Worked on user authentication
+- Helped design wireframes
+- Helped create databases
+- Worked on creating sidebars of our pages
+- Worked on creating css file for our pages
 
 ## Conclusion: A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
